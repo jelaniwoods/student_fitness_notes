@@ -4,6 +4,8 @@ RSpec.describe Exercise, type: :model do
   
     describe "Direct Associations" do
 
+    it { should belong_to(:workout) }
+
     it { should belong_to(:user) }
 
     end

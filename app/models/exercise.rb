@@ -1,6 +1,8 @@
 class Exercise < ApplicationRecord
   # Direct associations
 
+  belongs_to :workout
+
   belongs_to :user
 
   # Indirect associations
