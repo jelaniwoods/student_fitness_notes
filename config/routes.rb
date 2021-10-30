@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "workouts#index"
   resources :exercises
   resources :workouts
   devise_for :users
