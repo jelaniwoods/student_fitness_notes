@@ -1,12 +1,7 @@
 <% was_validated = exercise.errors.any? %>
 
 <%= form_with(model: exercise, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for user_id start -->
-  <!-- Input for "user_id" start -->
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <!-- Input for "user_id" end -->
-  <!-- Label and input for user_id end -->
-  <!-- Label and input for workout_id start -->
   <div class="form-group">
     <% workout_class = "form-control" %>
     <% workout_was_invalid = exercise.errors.include?(:workout) %>
@@ -20,9 +15,7 @@
     <% end %>
 
     <%= f.label :workout_id %>
-    <!-- Input for workout_id start -->
     <%= f.collection_select :workout_id, Workout.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for workout_id end -->
     <% if workout_was_invalid %>
       <% exercise.errors.full_messages_for(:workout).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -31,8 +24,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for workout_id end -->
-  <!-- Label and input for completed_on start -->
   <div class="form-group">
     <% completed_on_class = "form-control" %>
     <% completed_on_was_invalid = exercise.errors.include?(:completed_on) %>
@@ -46,9 +37,7 @@
     <% end %>
 
     <%= f.label :completed_on %>
-    <!-- Input for completed_on start -->
     <%= f.date_select :completed_on, class: completed_on_class, placeholder: "Enter completed on" %>
-    <!-- Input for completed_on end -->
     <% if completed_on_was_invalid %>
       <% exercise.errors.full_messages_for(:completed_on).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -57,8 +46,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for completed_on end -->
-  <!-- Label and input for weight start -->
   <div class="form-group">
     <% weight_class = "form-control" %>
     <% weight_was_invalid = exercise.errors.include?(:weight) %>
@@ -72,9 +59,7 @@
     <% end %>
 
     <%= f.label :weight %>
-    <!-- Input for weight start -->
     <%= f.number_field :weight, class: weight_class, placeholder: "Enter weight" %>
-    <!-- Input for weight end -->
     <% if weight_was_invalid %>
       <% exercise.errors.full_messages_for(:weight).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -83,8 +68,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for weight end -->
-  <!-- Label and input for reps start -->
   <div class="form-group">
     <% rep_class = "form-control" %>
     <% rep_was_invalid = exercise.errors.include?(:rep) %>
@@ -98,9 +81,7 @@
     <% end %>
 
     <%= f.label :reps %>
-    <!-- Input for reps start -->
     <%= f.text_field :reps, class: rep_class, placeholder: "Enter rep" %>
-    <!-- Input for reps end -->
     <% if rep_was_invalid %>
       <% exercise.errors.full_messages_for(:rep).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -109,6 +90,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for reps end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>

@@ -6,11 +6,9 @@
   <ul class="list-group list-group-flush">
     <% @user.workouts.each do |workout| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
-        <!-- Show link start -->
         <a href="/workouts/<%= workout.id %>">
           <%= workout %>
         </a>
-        <!-- Show link end -->
 
       </li>
     <% end %>

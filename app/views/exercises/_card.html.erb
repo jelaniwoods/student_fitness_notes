@@ -6,37 +6,27 @@
   <div class="card-body">
     <dl class="mb-1">
       <dt>User</dt>
-      <!-- Display user_id start -->
       <dd>
         <% if @exercise.user.present? %>
           <%= link_to exercise.user, exercise.user %>
         <% end %>
       </dd>
-      <!-- Display user_id end -->
 
       <dt>Workout</dt>
-      <!-- Display workout_id start -->
       <dd>
         <% if @exercise.workout.present? %>
           <%= link_to exercise.workout, exercise.workout %>
         <% end %>
       </dd>
-      <!-- Display workout_id end -->
 
       <dt>Completed on</dt>
-      <!-- Display completed_on start -->
       <dd><%= exercise.completed_on %></dd>
-      <!-- Display completed_on end -->
 
       <dt>Weight</dt>
-      <!-- Display weight start -->
       <dd><%= exercise.weight %></dd>
-      <!-- Display weight end -->
 
       <dt>Reps</dt>
-      <!-- Display reps start -->
       <dd><%= exercise.reps %></dd>
-      <!-- Display reps end -->
 
     </dl>
 
@@ -45,7 +35,6 @@
         <%= link_to_show_or_back exercise, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
-      <!-- Edit link exercise start -->
       <div class="col">
         <% if current_user == @exercise.user %>
           <%= link_to edit_exercise_url(exercise), class: "btn btn-block btn-sm btn-outline-secondary" do %>
@@ -53,9 +42,7 @@
           <% end %>
         <% end %>
       </div>
-      <!-- Edit link exercise end -->
 
-      <!-- Delete link exercise start -->
       <div class="col">
         <% if current_user == @exercise.user %>
           <%= link_to exercise, method: :delete, data: { confirm: "Do you really want to delete this exercise?" }, class: "btn btn-block btn-outline-secondary" do %>
@@ -63,7 +50,6 @@
           <% end %>
         <% end %>
       </div>
-      <!-- Delete link exercise end -->
     </div>
   </div>
 
