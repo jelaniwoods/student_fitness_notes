@@ -8,6 +8,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1
   def show
+    @exercise = Exercise.new
   end
 
   # GET /workouts/new
