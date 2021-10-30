@@ -42,7 +42,7 @@
 
     <%= f.label :workout_id %>
     <!-- Input for workout_id start -->
-    <%= f.number_field :workout_id, class: workout_class, placeholder: "Enter workout" %>
+    <%= f.collection_select :workout_id, Workout.all, :id, :to_s, {}, class: "form-control" %>
     <!-- Input for workout_id end -->
     <% if workout_was_invalid %>
       <% exercise.errors.full_messages_for(:workout).each do |message| %>
