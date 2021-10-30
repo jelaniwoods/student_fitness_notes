@@ -6,6 +6,8 @@ class WorkoutResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :exercises
+
   # Indirect associations
 
 end
