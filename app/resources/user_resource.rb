@@ -9,10 +9,9 @@ class UserResource < ApplicationResource
 
   # Direct associations
 
-  has_many   :exercises
+  has_many :exercises
 
   # Indirect associations
 
   many_to_many :workouts
-
 end

@@ -2,24 +2,23 @@ class Workout < ApplicationRecord
   # Direct associations
 
   has_many   :exercises,
-             :dependent => :destroy
+             dependent: :destroy
 
   # Indirect associations
 
   has_many   :users,
-             :through => :exercises,
-             :source => :user
+             through: :exercises,
+             source: :user
 
   # Validations
 
-  validates :name, :uniqueness => true
+  validates :name, uniqueness: true
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   # Scopes
 
   def to_s
     name
   end
-
 end

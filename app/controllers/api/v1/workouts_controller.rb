@@ -13,7 +13,7 @@ class Api::V1::WorkoutsController < Api::V1::GraphitiController
     workout = WorkoutResource.build(params)
 
     if workout.save
-      render jsonapi: workout, status: 201
+      render jsonapi: workout, status: :created
     else
       render jsonapi_errors: workout
     end
@@ -33,7 +33,7 @@ class Api::V1::WorkoutsController < Api::V1::GraphitiController
     workout = WorkoutResource.find(params)
 
     if workout.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: workout
     end

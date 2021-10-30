@@ -13,7 +13,7 @@ class Api::V1::ExercisesController < Api::V1::GraphitiController
     exercise = ExerciseResource.build(params)
 
     if exercise.save
-      render jsonapi: exercise, status: 201
+      render jsonapi: exercise, status: :created
     else
       render jsonapi_errors: exercise
     end
@@ -33,7 +33,7 @@ class Api::V1::ExercisesController < Api::V1::GraphitiController
     exercise = ExerciseResource.find(params)
 
     if exercise.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: exercise
     end

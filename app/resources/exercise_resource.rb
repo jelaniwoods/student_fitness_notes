@@ -15,5 +15,4 @@ class ExerciseResource < ApplicationResource
   belongs_to :user
 
   # Indirect associations
-
 end

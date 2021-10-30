@@ -1,6 +1,5 @@
 ActiveAdmin.register Exercise do
-
- permit_params :user_id, :workout_id, :completed_on, :weight, :reps
+  permit_params :user_id, :workout_id, :completed_on, :weight, :reps
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -14,5 +13,4 @@ ActiveAdmin.register Exercise do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
 end

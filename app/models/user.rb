@@ -1,22 +1,21 @@
 class User < ApplicationRecord
-  
   include JwtToken
-# Direct associations
+  # Direct associations
 
   has_many   :exercises,
-             :dependent => :destroy
+             dependent: :destroy
 
   # Indirect associations
 
   has_many   :workouts,
-             :through => :exercises,
-             :source => :workout
+             through: :exercises,
+             source: :workout
 
   # Validations
 
-  validates :first_name, :presence => true
+  validates :first_name, presence: true
 
-  validates :last_name, :presence => true
+  validates :last_name, presence: true
 
   # Scopes
 
