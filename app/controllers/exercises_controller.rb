@@ -4,25 +4,20 @@ class ExercisesController < ApplicationController
 
   before_action :set_exercise, only: %i[show edit update destroy]
 
-  # GET /exercises
   def index
     @q = Exercise.ransack(params[:q])
     @exercises = @q.result(distinct: true).includes(:user,
                                                     :workout).page(params[:page]).per(10)
   end
 
-  # GET /exercises/1
   def show; end
 
-  # GET /exercises/new
   def new
     @exercise = Exercise.new
   end
 
-  # GET /exercises/1/edit
   def edit; end
 
-  # POST /exercises
   def create
     @exercise = Exercise.new(exercise_params)
 
@@ -38,7 +33,6 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /exercises/1
   def update
     if @exercise.update(exercise_params)
       redirect_to @exercise, notice: "Exercise was successfully updated."
@@ -47,7 +41,6 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # DELETE /exercises/1
   def destroy
     @exercise.destroy
     message = "Exercise was successfully deleted."
@@ -68,12 +61,10 @@ class ExercisesController < ApplicationController
     end
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_exercise
     @exercise = Exercise.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def exercise_params
     params.require(:exercise).permit(:user_id, :workout_id, :completed_on,
                                      :weight, :reps)
