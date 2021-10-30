@@ -10,4 +10,6 @@ class WorkoutResource < ApplicationResource
 
   # Indirect associations
 
+  many_to_many :users
+
 end
