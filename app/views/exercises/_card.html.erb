@@ -1,0 +1,61 @@
+<div class="card mb-3">
+  <h2 class="card-header h4">
+    Exercise #<%= exercise.id %>
+  </h2>
+
+  <div class="card-body">
+    <dl class="mb-1">
+      <dt>User</dt>
+      <!-- Display user_id start -->
+      <dd><%= exercise.user_id %></dd>
+      <!-- Display user_id end -->
+
+      <dt>Workout</dt>
+      <!-- Display workout_id start -->
+      <dd><%= exercise.workout_id %></dd>
+      <!-- Display workout_id end -->
+
+      <dt>Completed on</dt>
+      <!-- Display completed_on start -->
+      <dd><%= exercise.completed_on %></dd>
+      <!-- Display completed_on end -->
+
+      <dt>Weight</dt>
+      <!-- Display weight start -->
+      <dd><%= exercise.weight %></dd>
+      <!-- Display weight end -->
+
+      <dt>Reps</dt>
+      <!-- Display reps start -->
+      <dd><%= exercise.reps %></dd>
+      <!-- Display reps end -->
+
+    </dl>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to_show_or_back exercise, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
+      </div>
+
+      <!-- Edit link exercise start -->
+      <div class="col">
+        <%= link_to edit_exercise_url(exercise), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <!-- Edit link exercise end -->
+
+      <!-- Delete link exercise start -->
+      <div class="col">
+        <%= link_to exercise, method: :delete, data: { confirm: "Do you really want to delete this exercise?" }, class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+      <!-- Delete link exercise end -->
+    </div>
+  </div>
+
+  <div class="card-footer text-muted">
+    Last updated <%= time_ago_in_words(exercise.updated_at) %> ago
+  </div>
+</div>
