@@ -7,12 +7,20 @@
     <dl class="mb-1">
       <dt>User</dt>
       <!-- Display user_id start -->
-      <dd><%= exercise.user_id %></dd>
+      <dd>
+        <% if @exercise.user.present? %>
+          <%= link_to exercise.user, exercise.user %>
+        <% end %>
+      </dd>
       <!-- Display user_id end -->
 
       <dt>Workout</dt>
       <!-- Display workout_id start -->
-      <dd><%= exercise.workout_id %></dd>
+      <dd>
+        <% if @exercise.workout.present? %>
+          <%= link_to exercise.workout, exercise.workout %>
+        <% end %>
+      </dd>
       <!-- Display workout_id end -->
 
       <dt>Completed on</dt>
