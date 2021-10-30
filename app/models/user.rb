@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :workouts,
+             :through => :exercises,
+             :source => :workout
+
   # Validations
 
   validates :first_name, :presence => true
