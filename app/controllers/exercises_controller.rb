@@ -5,7 +5,7 @@ class ExercisesController < ApplicationController
 
   # GET /exercises
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.page(params[:page]).per(10)
   end
 
   # GET /exercises/1

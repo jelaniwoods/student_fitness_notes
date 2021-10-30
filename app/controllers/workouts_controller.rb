@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts
   def index
-    @workouts = Workout.all
+    @workouts = Workout.page(params[:page]).per(10)
   end
 
   # GET /workouts/1
