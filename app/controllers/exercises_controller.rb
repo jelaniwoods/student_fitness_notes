@@ -1,4 +1,6 @@
 class ExercisesController < ApplicationController
+  before_action :current_user_must_be_exercise_user, only: [:edit, :update, :destroy] 
+
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
 
   # GET /exercises
@@ -57,6 +59,14 @@ class ExercisesController < ApplicationController
 
 
   private
+
+  def current_user_must_be_exercise_user
+    set_exercise
+    unless current_user == @exercise.user
+      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+    end
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_exercise
       @exercise = Exercise.find(params[:id])

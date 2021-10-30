@@ -39,16 +39,20 @@
 
       <!-- Edit link exercise start -->
       <div class="col">
-        <%= link_to edit_exercise_url(exercise), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
+        <% if current_user == @exercise.user %>
+          <%= link_to edit_exercise_url(exercise), class: "btn btn-block btn-sm btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
         <% end %>
       </div>
       <!-- Edit link exercise end -->
 
       <!-- Delete link exercise start -->
       <div class="col">
-        <%= link_to exercise, method: :delete, data: { confirm: "Do you really want to delete this exercise?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
+        <% if current_user == @exercise.user %>
+          <%= link_to exercise, method: :delete, data: { confirm: "Do you really want to delete this exercise?" }, class: "btn btn-block btn-outline-secondary" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         <% end %>
       </div>
       <!-- Delete link exercise end -->
