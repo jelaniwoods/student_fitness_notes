@@ -5,7 +5,7 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: %i[show edit update destroy]
 
   def index
-    @q = Exercise.ransack(params[:q])
+    @q = current_user.exercises.ransack(params[:q])
     @exercises = @q.result(distinct: true).includes(:user,
                                                     :workout).page(params[:page]).per(10)
   end

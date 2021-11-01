@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root to: "workouts#index"
+  root to: "exercises#index"
   resources :exercises
   resources :workouts
   devise_for :users

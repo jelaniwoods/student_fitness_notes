@@ -12,6 +12,6 @@ class Exercise < ApplicationRecord
   # Scopes
 
   def to_s
-    user.to_s
+    workout.to_s + " on " + completed_on.to_s
   end
 end

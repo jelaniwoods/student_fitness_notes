@@ -8,7 +8,7 @@
   </div>
 
   <ul class="list-group list-group-flush">
-    <% @workout.exercises.each do |exercise| %>
+    <% @workout.exercises.where(user: current_user).each do |exercise| %>
       <li class="list-group-item d-flex align-items-center justify-content-between">
         <%= link_to exercise, exercise %>
 
