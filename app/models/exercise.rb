@@ -9,8 +9,12 @@ class Exercise < ApplicationRecord
 
   # Validations
 
-  # Scopes
+  validates :completed_on, presence: true
+  validates :weight, presence: true
+  validates :reps, presence: true
 
+  # Scopes
+  
   def to_s
     workout.to_s + " on " + completed_on.to_s
   end

@@ -15,7 +15,7 @@
     <% end %>
 
     <%= f.label :workout_id %>
-    <%= f.collection_select :workout_id, Workout.all, :id, :to_s, {}, class: "form-control" %>
+    <%= f.collection_select :workout_id, Workout.order(:name), :id, :to_s, {}, class: "form-control" %>
     <% if workout_was_invalid %>
       <% exercise.errors.full_messages_for(:workout).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -25,7 +25,7 @@
     <% end %>
   </div>
   <div class="form-group">
-    <% completed_on_class = "form-control" %>
+    <% completed_on_class = "form-control datetimepicker-input" %>
     <% completed_on_was_invalid = exercise.errors.include?(:completed_on) %>
 
     <% if was_validated %>
@@ -37,7 +37,21 @@
     <% end %>
 
     <%= f.label :completed_on %>
-    <%= f.date_select :completed_on, class: completed_on_class, placeholder: "Enter completed on" %>
+    <div class='input-group date' id='completed_on_picker' data-target-input="nearest">
+      <%= f.text_field :completed_on, :class => completed_on_class, :placeholder => "When did you do the exercise?", value: nil, :data => {:target => '#completed_on_picker'} %>
+      <div class="input-group-append" data-target='#completed_on_picker' data-toggle="datetimepicker">
+        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function () {
+        $('#completed_on_picker').datetimepicker({
+          format: 'DD-MMM-YYYY',
+          defaultDate: '<%= exercise.completed_on.present? ? exercise.completed_on.strftime("%d-%b-%Y") : Date.today.strftime("%d-%b-%Y") %>'
+        });
+      });
+    </script>
+    
     <% if completed_on_was_invalid %>
       <% exercise.errors.full_messages_for(:completed_on).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -58,8 +72,8 @@
       <% end %>
     <% end %>
 
-    <%= f.label :weight %>
-    <%= f.number_field :weight, class: weight_class, placeholder: "Enter weight" %>
+    <%= f.label :weight, "Weight (in lbs)" %>
+    <%= f.number_field :weight, class: weight_class, placeholder: "Example: 10" %>
     <% if weight_was_invalid %>
       <% exercise.errors.full_messages_for(:weight).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -80,8 +94,8 @@
       <% end %>
     <% end %>
 
-    <%= f.label :reps %>
-    <%= f.text_field :reps, class: rep_class, placeholder: "Enter rep" %>
+    <%= f.label :reps, "Number of reps" %>
+    <%= f.text_field :reps, class: rep_class, placeholder: "Example: 30" %>
     <% if rep_was_invalid %>
       <% exercise.errors.full_messages_for(:rep).each do |message| %>
         <div class="invalid-feedback d-flex">

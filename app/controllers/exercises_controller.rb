@@ -6,8 +6,22 @@ class ExercisesController < ApplicationController
 
   def index
     @q = current_user.exercises.ransack(params[:q])
-    @exercises = @q.result(distinct: true).includes(:user,
-                                                    :workout).page(params[:page]).per(10)
+    @exercises = @q.
+                   result(distinct: true).
+                   includes(:user, :workout).
+                   order(completed_on: :desc).
+                   page(params[:page]).
+                   per(25)
+  
+  
+    last_created_exercise = current_user.exercises.order(created_at: :desc).first
+
+    @new_exercise = current_user.exercises.build(
+      workout: last_created_exercise.try(:workout),
+      completed_on: Date.today,
+      reps: last_created_exercise.try(:reps),
+      weight: last_created_exercise.try(:weight)
+    )
   end
 
   def show; end
@@ -19,14 +33,14 @@ class ExercisesController < ApplicationController
   def edit; end
 
   def create
-    @exercise = Exercise.new(exercise_params)
+    @exercise = Exercise.new(exercise_params.merge(user: current_user))
 
     if @exercise.save
       message = "Exercise was successfully created."
       if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
         redirect_back fallback_location: request.referer, notice: message
       else
-        redirect_to @exercise, notice: message
+        redirect_to exercises_url, notice: message
       end
     else
       render :new
@@ -35,7 +49,7 @@ class ExercisesController < ApplicationController
 
   def update
     if @exercise.update(exercise_params)
-      redirect_to @exercise, notice: "Exercise was successfully updated."
+      redirect_to exercises_url, notice: "Exercise was successfully updated."
     else
       render :edit
     end

@@ -1,21 +1,28 @@
-<%= search_form_for @q, :class => collapse_search_form, :id => "exercises_filters" do |f| %>
+<%= search_form_for @q, :id => "exercises_filters" do |f| %>
   <p class="lead">Narrow results:</p>
 
   <div class="form-group">
-    <%= f.label :completed_on, "Completed on" %>
-    <div class="row">
-      <div class='col-md-6 mb-1'>
+    <%= f.label :workout_name_cont, "Workout name contains" %>
+    <%= f.text_field :workout_name_cont, :class => "form-control", :placeholder => "Example: press" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :completed_on, "Completed between" %>
+    <div class="row mb-1">
+      <div class='col-md-12'>
         <div class='input-group date' id='completed_ongteqPicker' data-target-input="nearest">
-          <%= f.text_field :completed_on_gteq, :class => "form-control datetimepicker-input", :placeholder => "Completed on greater than or equal to", :data => {:target => '#completed_ongteqPicker'} %>
+          <%= f.text_field :completed_on_gteq, :class => "form-control datetimepicker-input", :placeholder => "On or after...", :data => {:target => '#completed_ongteqPicker'}, value: nil %>
           <div class="input-group-append" data-target='#completed_ongteqPicker' data-toggle="datetimepicker">
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class='col-md-6'>
+    <div class="row">
+      <div class='col-md-12'>
         <div class='input-group date' id='completed_onlteqPicker' data-target-input="nearest">
-          <%= f.text_field :completed_on_lteq, :class => "form-control datetimepicker-input", :placeholder => "Completed on less than or equal to", :data => {:target => '#completed_onlteqPicker'} %>
+          <%= f.text_field :completed_on_lteq, :class => "form-control datetimepicker-input", :placeholder => "On or before...", :data => {:target => '#completed_onlteqPicker'}, value: nil %>
           <div class="input-group-append" data-target='#completed_onlteqPicker' data-toggle="datetimepicker">
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
           </div>
@@ -26,11 +33,12 @@
   <script type="text/javascript">
       $(function () {
           $('#completed_ongteqPicker').datetimepicker({
-              format: 'MM/DD/YYYY'
+            format: 'DD-MMM-YYYY',
+            defaultDate: '<%= @q.completed_on_gteq.try(:strftime, "%d-%b-%Y") %>'
           });
           $('#completed_onlteqPicker').datetimepicker({
-              useCurrent: false,
-              format: 'MM/DD/YYYY'
+            format: 'DD-MMM-YYYY',
+            defaultDate: '<%= @q.completed_on_lteq.try(:strftime, "%d-%b-%Y") %>'
           });
           $('#completed_ongteqPicker').on("dp.change", function (e) {
               $('#completed_onlteqPicker').data("DateTimePicker").minDate(e.date);
@@ -41,18 +49,8 @@
       });
   </script>
 
-  <div class="form-group">
-    <%= f.label :workout_name_cont, "Workout name contains" %>
-    <%= f.text_field :workout_name_cont, :class => "form-control", :placeholder => "Workout name contains" %>
-  </div>
-
-
-  <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+  <%= f.submit :class => "btn btn-primary btn-block" %>
 
   <a href="/exercises" class="btn btn-outline-secondary btn-block mb-1">Clear filters</a>
 
 <% end %>
-
-<a class="btn btn-outline-secondary btn-block mb-1" data-toggle="collapse" href="#exercises_filters">
-  Show filters
-</a>

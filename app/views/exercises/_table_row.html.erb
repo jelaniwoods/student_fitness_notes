@@ -1,0 +1,19 @@
+<tr>
+  <td><%= exercise.workout.name %></td>
+  <td><%= exercise.reps %></td>
+  <td><%= exercise.weight %></td>
+  <td><%= exercise.completed_on.strftime("%d-%b-%Y") %></td>
+  <td>
+    <% if current_user == exercise.user %>
+      <div>
+        <%= link_to edit_exercise_url(exercise), class: "btn btn-sm btn-outline-secondary mr-1" do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      
+        <%= link_to exercise, method: :delete, data: { confirm: "Do you really want to delete this exercise?" }, class: "btn btn-sm btn-outline-secondary" do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+</tr>

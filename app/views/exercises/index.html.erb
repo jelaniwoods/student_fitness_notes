@@ -1,42 +1,49 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1 class="display-4">
-      Exercises
-
-      <%= link_to new_exercise_path, class: "btn btn-lg btn-outline-secondary" do %>
-        <i class="fas fa-plus fa-fw"></i>
-      <% end %>
+      Workout log
     </h1>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-12 mb-3">
-    <%= render partial: "exercises/exercises_search_form" %>
-  </div>
-</div>
+<div class="row mb-3">
+  <div class="col-md-4 mb-3">
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="lead">Log an exercise:</p>
 
-
-
-
-<div class="row justify-content-center mb-3">
-  <div class="col-md-8">
-    <div class="card">
-      <h1 class="card-header h4 d-flex align-items-center justify-content-between">
-        Exercises
-
-        <%= link_to new_exercise_path, class: "btn btn-sm btn-outline-secondary" do %>
-          <i class="fas fa-plus fa-fw"></i>
-        <% end %>
-      </h1>
-
-      <div class="list-group list-group-flush">
-        <%= render collection: @exercises, partial: "list_item", as: :exercise %>
+        <%= render "form", exercise: @new_exercise %>
       </div>
-      <div class="card-footer d-flex justify-content-center">
-        <%= paginate @exercises, theme: 'twitter-bootstrap-4' %>
-      </div>
-
     </div>
+
+    <div class="card">
+      <div class="card-body">
+        <%= render partial: "exercises/exercises_search_form" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8 mb-3">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Workout</th>
+            <th scope="col">Reps</th>
+            <th scope="col">Weight (lbs)</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render collection: @exercises, partial: "table_row", as: :exercise %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @exercises, theme: 'twitter-bootstrap-4' %>
+    </div>
+
   </div>
 </div>
